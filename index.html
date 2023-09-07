@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organic Food Store</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Your existing CSS styles */
+       body{ 
+ background-color:  #f9f9f9;
+            color: #333;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff0000;
+        }
+
+        .menu {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .menu button {
+                    background: linear-gradient(to bottom right,  #00FF00, #008000);
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin: 0 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .product {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .product h3 {
+            color: #fff;
+            background-color:green;
+           
+           padding:4px;
+           text-align:center;
+           border-radius:4px;
+        }
+
+        .cart-item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .cart-item h3 {
+            color: #333;
+        }
+
+        .total {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .feedback textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: vertical;
+        }
+
+        .feedback button {
+            background-color: #ff0000;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .CartBtn {
+  width: 140px;
+  height: 40px;
+  border-radius: 12px;
+  border: none;
+  background-color: rgb(255, 208, 0);
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition-duration: .5s;
+  overflow: hidden;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.103);
+  position: relative;
+}
+
+.IconContainer {
+  position: absolute;
+  left: -50px;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 2;
+  transition-duration: .5s;
+}
+
+.icon {
+  border-radius: 1px;
+}
+
+.text {
+  height: 100%;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(17, 17, 17);
+  z-index: 1;
+  transition-duration: .5s;
+  font-size: 1.04em;
+  font-weight: 600;
+}
+
+.CartBtn:hover .IconContainer {
+  transform: translateX(58px);
+  border-radius: 40px;
+  transition-duration: .5s;
+}
+
+.CartBtn:hover .text {
+  transform: translate(10px,0px);
+  transition-duration: .5s;
+}
+
+.CartBtn:active {
+  transform: scale(0.95);
+  transition-duration: .5s;
+}/* ... */.search {
+  display: inline-block;
+  position: relative;
+}
+
+.search input[type="text"] {
+  width: 320px;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.search button[type="submit"] {
+  background-color: #4e99e9;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 0;
+  right: 0;
+  transition: .9s ease;
+}
+
+.search button[type="submit"]:hover {
+  transform: scale(1.1);
+  color: rgb(255, 255, 255);
+  background-color: blue;
+}
+.cart-menu > button{
+    background-color: rgb(255, 208, 0);
+  border: none;
+  color: black;
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+}
+.cart-menu:active {
+  transform: scale(0.95);
+  transition-duration: .5s;
+}/* ... */.search {
+  display: inline-block;
+  position: relative;
+}
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Welcome to Organic Food Store</h1>
+        <div class="menu">
+            <button onclick="showCatalogue(); myFunction()">View Product Catalogue</button>
+             <button onclick="showCart()">Cart <span id="cartCount">(0)</span></button>
+       
+            </div>
+            <div id="myDIV" style="display: none;"> <br>    <div class="search">
+        <input id="productSearch" placeholder="Search..." type="text">
+        <button onclick="searchProducts()" type="submit">Go</button>
+      
+ </div>
+           
+        </div>
+        <div class="content" id="content"></div>
+    </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+    <script>
+        // Your existing JavaScript code
+        // ...
+let products;
+
+// Load product data from JSON file using Fetch API
+fetch("products.json")
+  .then(response => response.json())
+  .then(data => {
+    products = data;
+    // Call the function to show the product catalogue
+  })
+  .catch(error => console.error("Error loading product data:", error));
+  
+        let cart = [];
+
+        function showCatalogue() {
+            const catalogueHTML = products.map(product => `
+                <div class="product">
+                    <h3>${product.name}</h3>
+                    <p>Price: $${product.price.toFixed(2)}</p>
+                    <p>Weight: ${product.weight}</p>
+                    <p>Benefits: ${product.benefits}</p>
+                      <button onclick="addToCart(${product.id})" class="CartBtn">
+  <span class="IconContainer"> 
+    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512" fill="rgb(17, 17, 17)" class="cart"><path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path></svg>
+  </span>
+  <p class="text">Add to Cart</p>
+</button>
+                    
+                </div>
+            `).join('');
+
+            document.getElementById("content").innerHTML = catalogueHTML;
+        }
+
+        function showCart() {
+            const cartHTML = cart.map(item => `
+                <div class="cart-item">
+                    <h3>${item.name}</h3>
+                    <p>Price: $${item.price.toFixed(2)}</p>
+                    <p>Weight: $${item.weight}</p>
+                </div>
+            `).join('');
+
+            const total = cart.reduce((acc, item) => acc + item.price, 0);
+
+            document.getElementById("content").innerHTML = `
+                <h2>Cart</h2>
+                ${cartHTML}
+                <h3>Total: $${total.toFixed(2)}</h3>
+                <div class="cart-menu">
+  <button onclick="downloadDataAsExcel()">Download cart</button>
+                <button onclick="makePayment()">Make Payment</button>
+   <button onclick="clearcart()">clear cart</button></div>
+            `;
+        }
+
+
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                cart.push(product);
+                updateCartCount();
+         
+            }
+        }
+  function clearcart() {
+            alert("your carted item would be cleared");
+            cart=[];
+            updateCartCount();
+            showCatalogue();
+        }
+        function makePayment() {
+            alert("Payment successful! Thank you for shopping with us.");
+            
+            updateCartCount();
+            showCatalogue();
+        }
+
+
+        function updateCartCount() {
+            document.getElementById("cartCount").textContent = `(${cart.length})`;
+        }
+
+        // Show the greeting and initial menu
+        document.getElementById("content").innerHTML = `
+            
+<head>
+    <title>Importance and Benefits of the Organic Shop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #27ae60;
+        }
+        p {
+            color: #333;
+        }
+        ul {
+            list-style-type: disc;
+            color: #3498db;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Importance and Benefits of the Organic Shop</h1>
+    <p>
+        Organic shops play a vital role in promoting sustainable and healthy living. Here are some of the key importance and benefits they offer:
+    </p>
+    <h2>1. Environmentally Friendly</h2>
+    <p>
+        Organic shops prioritize selling products that are grown and produced using organic farming methods. These methods avoid the use of harmful synthetic chemicals, pesticides, and genetically modified organisms (GMOs). By supporting organic shops, consumers contribute to the preservation of soil quality, water conservation, and the reduction of harmful impacts on ecosystems and wildlife.
+    </p>
+
+    <h2>2. Health Benefits</h2>
+    <p>
+        Organic products are free from harmful chemicals, hormones, and antibiotics commonly found in conventionally grown or produced items. Consuming organic food reduces the risk of exposure to harmful substances, promoting better health and well-being. Organic produce also tends to be more nutrient-rich, contributing to a balanced and healthy diet.
+    </p>
+
+    <h2>3. Support for Local Farmers</h2>
+    <p>
+        Organic shops often source their products from local farmers and producers. By purchasing from these shops, consumers support local agriculture and small-scale farmers, contributing to the growth of sustainable farming practices and the local economy.
+    </p>
+
+    <h2>4. Biodiversity Conservation</h2>
+    <p>
+        Organic farming practices prioritize biodiversity conservation. By avoiding the use of harmful chemicals, organic farms provide a safer environment for various plant and animal species to thrive. This helps maintain a healthier ecosystem and ensures the long-term sustainability of agriculture.
+    </p>
+
+    <h2>5. Reduced Carbon Footprint</h2>
+    <p>
+        Organic shops often promote eco-friendly and sustainable practices, including reducing transportation distances for sourcing products. Buying from local organic shops can help lower the carbon footprint associated with food and product distribution, contributing to overall environmental sustainability.
+    </p>
+
+    <h2>6. Ethical Treatment of Animals</h2>
+    <p>
+        Organic shops offer a variety of products that meet higher animal welfare standards. Organic animal products are often sourced from farms that prioritize humane treatment, providing animals with more space to roam and avoiding the use of antibiotics and growth hormones.
+    </p>
+
+    <h2>7. Pesticide Reduction</h2>
+    <p>
+        Choosing organic products helps to decrease the demand for chemical pesticides. This leads to a reduction in their usage, minimizing their negative impact on the environment and human health.
+    </p>
+
+    <p>
+        In conclusion, supporting organic shops has significant importance and benefits for both individuals and the planet. By choosing organic products, consumers contribute to a more sustainable, healthier, and environmentally conscious way of living.
+    </p>
+</body>
+
+      `;
+        
+        function downloadDataAsExcel() {
+      // Sample data (replace this with your cart data)
+if (cart.length === 0) {
+                alert("Your cart is empty. Please add items to the cart first.");
+                return;
+            }
+
+            const cartData = cart.map(item => ({
+                "Product Name": item.name,
+                "Weight":item.weight, 
+                "Price": `$${item.price.toFixed(2)}`
+            }));
+
+
+      // Create a new workbook and sheet
+      const wb = XLSX.utils.book_new();
+      const ws = XLSX.utils.json_to_sheet(cartData);
+
+      // Add the sheet to the workbook
+      XLSX.utils.book_append_sheet(wb, ws, "Cart Data");
+
+      // Generate the XLSX file and trigger the download
+      const wbout = XLSX.write(wb, { bookType: "xlsx", type: "binary" });
+      function s2ab(s) {
+        const buf = new ArrayBuffer(s.length);
+        const view = new Uint8Array(buf);
+        for (let i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xff;
+        return buf;
+      }
+      const blob = new Blob([s2ab(wbout)], { type: "application/octet-stream" });
+      const fileName = "cart_data.xlsx";
+      if (navigator.msSaveBlob) {
+        // For IE 10+
+        navigator.msSaveBlob(blob, fileName);
+      } else {
+        const link = document.createElement("a");
+        if (link.download !== undefined) {
+          // For modern browsers
+          const url = URL.createObjectURL(blob);
+          link.setAttribute("href", url);
+          link.setAttribute("download", fileName);
+          link.style.visibility = "hidden";
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }
+      }
+    }
+        
+function searchProducts() {
+            const searchInput = document.getElementById("productSearch").value.toLowerCase();
+            const filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchInput));
+
+            const catalogueHTML = filteredProducts.map(product => `
+                <div class="product">
+                    <h3>${product.name}</h3>
+                    <p>Price: $${product.price.toFixed(2)}</p>
+                    <p>Nutritional Values: ${product.nutrition}</p>
+                    <p>Benefits: ${product.benefits}</p>
+                    <button onclick="addToCart(${product.id})">Add to Cart</button>
+                </div>
+            `).join('');
+
+            document.getElementById("content").innerHTML = catalogueHTML;
+        }
+        function myFunction() {
+  document.getElementById("myDIV").style.display = "block";
+}
+    </script>
+   
+</body>
+
+    </html>
